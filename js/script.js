@@ -43,6 +43,7 @@ const allquestions = [
         correct: "c-input",
     },
 ];
+let main_conatainer= document.querySelector("#main-container")
 let question_header = document.querySelector(".question-header")
 let question = document.querySelector("#question");
 let answerElements = document.querySelectorAll(".answer");
@@ -98,28 +99,26 @@ submitbtn.addEventListener("click", () => {
             loadQuiz();
         }
         else {
-            showscore.innerHTML = `
+            main_conatainer .innerHTML = `
               <h2>You answered ${score}/${allquestions.length} questions correctly</h2>
               <button onclick="location.reload()">Try Again</button>
           `;
-            showscore.classList.remove("scorearea");
+          main_conatainer.classList.remove("scorearea");
         }
     }
 });
-    // for countDownDate
-var countDownDate = new Date("Jan 5, 2024 15:37:25").getTime();
-var x = setInterval(function() {
-  var now = new Date().getTime();
-  var distance = countDownDate - now;
-    
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    
-  // Output the result in an element with id="demo"
-  document.getElementById("demo").innerHTML =  "00:"+seconds + "s ";
-    
-  // If the count down is over, write some text 
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("demo").innerHTML = "EXPIRED";
-  }
-}, 1000);
+var countDownDate = 10;
+  var x = setInterval(function() {
+  //   var now = new Date().getTime();
+  //   var distance =now - countDownDate;
+  //   var seconds = Math.floor((countDownDate % ( 60)) / 1000);
+    document.getElementById("demo").innerHTML = "Total Time" + "<br>" + "00:"+ countDownDate + "s ";
+    countDownDate--
+    if (countDownDate < 0) {
+      clearInterval(countDownDate);
+      document.getElementById("demo").innerHTML = "EXPIRED";
+      main_conatainer.innerHTML = `
+      <h2>You answered ${score}/${allquestions.length} questions correctly</h2>
+      <button onclick="location.reload()">Try Again</button>
+  `}
+  }, 1000);
